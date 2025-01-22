@@ -1,0 +1,46 @@
+{
+  "item1": [
+    {
+      "productName": "apple",
+      "productDescription": "friut",
+      "productCost": 250
+    },
+    {
+      "productName": "mango",
+      "productDescription": "friut",
+      "productCost": 100
+    },
+    {
+      "productName": "Bottle",
+      "productDescription": "jam",
+      "productCost": 150
+    },
+    {
+      "productName": "computer",
+      "productDescription": "PC",
+      "productCost": 150000
+    }
+  ],
+  "item2": [
+    {
+      "productName": "yo yo yo",
+      "productDescription": "friut",
+      "productCost": 250
+    },
+    {
+      "productName": "melons",
+      "productDescription": "friut",
+      "productCost": 100
+    },
+    {
+      "productName": "Bottle",
+      "productDescription": "jam",
+      "productCost": 150
+    },
+    {
+      "productName": "computer",
+      "productDescription": "PC",
+      "productCost": 150000
+    }
+  ]
+}

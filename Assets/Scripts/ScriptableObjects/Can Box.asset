@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Can Box
   m_EditorClassIdentifier: 
   itemName: Box of can
-  boxCapacity: 30
+  itemDescription: Thi is a box of Can food
+  cost: 10

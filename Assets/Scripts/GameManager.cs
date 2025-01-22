@@ -10,4 +10,5 @@ public class GameManager : MonoBehaviour
     {
         shardsText.text = "Shards : " + shards;
     }
+
 }
