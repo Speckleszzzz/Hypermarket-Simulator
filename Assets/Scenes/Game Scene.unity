@@ -614,7 +614,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -682,9 +682,9 @@ Transform:
   m_GameObject: {fileID: 232325157}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.452, y: 1.887455, z: 8.562}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 8.452, y: 2.88, z: -1.41}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2567,8 +2567,9 @@ MonoBehaviour:
     essentialItem2: []
   saveFile: Assets/Resources/list.json
   essentialFile: Assets/Resources/essentials.json
-  dropTest: {fileID: 232325161}
-  dropTestObject: {fileID: 9068540456349382065, guid: 1a21a95d4b0f19d49acad466bf30a040, type: 3}
+  dropPoint: {fileID: 232325161}
+  itemSpacing: 0.5
+  occupiedPositions: []
   contentParentForTier1: {fileID: 901378583}
   ItemTemplateForTier1: {fileID: 6142306106389773627}
   contentParentforTier2: {fileID: 1555659005}
@@ -2580,6 +2581,7 @@ MonoBehaviour:
   tier1ProductList: []
   essentialProductList: []
   productInCart: []
+  productInCartPrice: 0
   itemPrefabs:
   - {fileID: 3770759809925464057, guid: 53b8323b20b36b04dba54de23be2e84e, type: 3}
   - {fileID: 8507009104240135888, guid: 8a44be80c53fa334d80ddd9bdacb3b07, type: 3}

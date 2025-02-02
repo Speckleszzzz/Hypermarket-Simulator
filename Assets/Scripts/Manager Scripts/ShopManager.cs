@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -15,8 +16,9 @@ public class ShopManager : MonoBehaviour
     public string saveFile;
     public string essentialFile;
 
-    public Transform dropTest;
-    public GameObject dropTestObject;
+    public Transform dropPoint;
+    public float itemSpacing = 0.5f;
+    [SerializeField] List<Vector3> occupiedPositions = new List<Vector3>();
 
     public Transform contentParentForTier1;
     public GameObject ItemTemplateForTier1;
@@ -33,7 +35,8 @@ public class ShopManager : MonoBehaviour
     [SerializeField] List<string> tier1ProductList;   // stores the available product in Tier 1
     [SerializeField] List<string> essentialProductList;
     [SerializeField] List<string> productInCart;
-    [SerializeField] List<GameObject> itemPrefabs; 
+    [SerializeField] float productInCartPrice;
+    [SerializeField] List<GameObject> itemPrefabs;
 
     [SerializeField] int item1Count = 0;
     [SerializeField] int essential1Count = 0;
@@ -152,27 +155,109 @@ public class ShopManager : MonoBehaviour
         temp.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = costOfTheProduct;
         temp.SetActive(true);
         productInCart.Add(nameOfTheProduct);
+        productInCartPrice += int.Parse(costOfTheProduct);
     }
 
     public void OnPurchaseBtn()
     {
-        foreach (string productName in productInCart)
+        if (productInCartPrice <= GameManager.instance.shards)
         {
-            GameObject matchingPrefab = itemPrefabs.Find(prefab => prefab.name == productName);
+            BoxCollider boxCollider = dropPoint.GetComponent<BoxCollider>();
 
-            if (matchingPrefab != null)
+            if (boxCollider == null)
             {
-                Debug.Log("Purchased" + matchingPrefab.name);
-                Instantiate(matchingPrefab, Vector3.zero, Quaternion.identity);
-                productInCart.Remove(productName);
-
+                Debug.Log("MataFker put a box collider in the drop location");
             }
+
             else
             {
-                Debug.Log("matching Prefab Missing for " + productName);
+                Vector3 boxSize = boxCollider.bounds.size;
+                Vector3 boxMin = boxCollider.bounds.min;
+                Vector3 boxMax = boxCollider.bounds.max;
+
+                occupiedPositions.Clear();
+
+
+                for (int i = 0; i < productInCart.Count; i++)
+                {
+                    string productName = productInCart[i];
+                    GameObject matchingPrefab = itemPrefabs.Find(prefab => prefab.name == productName);
+
+                    if (matchingPrefab != null)
+                    {
+                        Debug.Log("Purchased" + matchingPrefab.name);
+                        Vector3 spawnPosition = FindValidPosition(boxMin, boxMax, matchingPrefab);
+
+                        if (spawnPosition != Vector3.zero)
+                        {
+                            GameObject temp = Instantiate(matchingPrefab, spawnPosition, Quaternion.identity);
+                            temp.AddComponent<Rigidbody>();
+                            
+                            if(tier1ProductList.Contains(productName))
+                            {
+                                temp.tag = "product";
+                            }
+                            else if (essentialProductList.Contains(productName))
+                            {
+                                temp.tag = "stall";
+                            }
+
+
+                            occupiedPositions.Add(spawnPosition);
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.Log("matching Prefab Missing for " + productName);
+                    }
+                }
+
+                Debug.Log("got all Items. the amount deducted is : " + productInCartPrice);
+                GameManager.instance.shards += -productInCartPrice;
+                GameManager.instance.UpdateShards();
+                productInCartPrice = 0;
+                productInCart.Clear();
             }
         }
+        else
+        {
+            Debug.Log("MataFker you are broke as hell");
+        }
+
     }
+
+    Vector3 FindValidPosition(Vector3 min, Vector3 max, GameObject prefab)
+    {
+        int maxAtempt = 100;
+
+        for (int i = 0; i < maxAtempt; i++)
+        {
+            float randomX = UnityEngine.Random.Range(min.x, max.x);
+            float randomZ = UnityEngine.Random.Range(min.z, max.z);
+
+            Vector3 spawnPosition = new Vector3(randomX, min.y, randomZ);
+
+            bool positionOccupied = false;
+
+            foreach (Vector3 occupied in occupiedPositions)
+            {
+                if (Vector3.Distance(spawnPosition, occupied) < itemSpacing)
+                {
+                    positionOccupied = true;
+                    break;
+                }
+            }
+
+            if (!positionOccupied)
+            {
+                return spawnPosition;
+            }
+        }
+        return Vector3.zero;  // this mean there is no valid position
+    }
+
+
 
     public void RemoveItemFromCart(GameObject a)
     {

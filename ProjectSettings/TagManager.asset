@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - Button
   - Test
+  - stall
+  - product
   layers:
   - Default
   - TransparentFX

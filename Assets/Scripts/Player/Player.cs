@@ -58,6 +58,34 @@ public class Player : MonoBehaviour
                 
             }
 
+            else if (hit.collider.tag == "stall")
+            {
+                heldObject = hit.transform;
+                hit.transform.SetParent(hand.transform);
+                rb = heldObject.GetComponent<Rigidbody>();
+
+                rb.useGravity = false;
+                rb.isKinematic = true;
+
+                hit.transform.position = hand.transform.position;
+                hit.transform.eulerAngles = hand.transform.eulerAngles;
+                isGrabing = true;
+            }
+
+            else if (hit.collider.tag == "product")
+            {
+                heldObject = hit.transform;
+                hit.transform.SetParent(hand.transform);
+                rb = heldObject.GetComponent<Rigidbody>();
+
+                rb.useGravity = false;
+                rb.isKinematic = true;
+
+                hit.transform.position = hand.transform.position;
+                hit.transform.eulerAngles = hand.transform.eulerAngles;
+                isGrabing = true;
+            }
+            
             starterAssetsInputs.InteractInput(false);
         }
     }
