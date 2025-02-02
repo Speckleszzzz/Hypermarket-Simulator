@@ -1,29 +1,29 @@
 {
-  "item1": [
+  "essentialItem1": [
     {
-      "productName": "apple",
-      "productDescription": "friut",
+      "productName": "stand",
+      "productDescription": "holds 4 different items",
       "productCost": 250
     },
     {
-      "productName": "mango",
-      "productDescription": "friut",
+      "productName": "double stand",
+      "productDescription": "holds 8 different items",
       "productCost": 100
     },
     {
-      "productName": "Bottle",
-      "productDescription": "jam",
+      "productName": "fridge",
+      "productDescription": "holds 4 different items",
       "productCost": 150
     },
     {
-      "productName": "computer",
-      "productDescription": "PC",
+      "productName": "double fridge",
+      "productDescription": "holds 8 different items",
       "productCost": 150000
     }
   ],
-  "item2": [
+  "essentialItem2": [
     {
-      "productName": "orange",
+      "productName": "yo yo yo",
       "productDescription": "friut",
       "productCost": 250
     },
@@ -38,7 +38,7 @@
       "productCost": 150
     },
     {
-      "productName": "mustard",
+      "productName": "computer",
       "productDescription": "PC",
       "productCost": 150000
     }
