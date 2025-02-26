@@ -24,6 +24,9 @@ Json Integration
 🚀 How to Play
 (Still In Production)
 
+## Itch.IO 
+[Click Here to go to my Itch.io Page to view my Games](https://specklez.itch.io/)
+
 📸 Screenshots
 
 
